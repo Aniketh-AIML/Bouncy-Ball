@@ -73,7 +73,12 @@ class Game:
                 ):
 
                     self.ball.vy = -self.ball.vy
+
                     self.score += 1
+
+                    # Every 5 hits increase speed
+                    if self.score % 5 == 0:
+                        self.ball.increase_speed()
 
                 # Ball missed
                 if self.ball.y + self.ball.radius > HEIGHT:
@@ -96,13 +101,15 @@ class Game:
             self.paddle.draw(self.window)
 
             # Score
-            score_text = self.font.render(
-                f"Score: {self.score}",
-                True,
-                (0, 0, 0)
-            )
+            score_text = self.font.render(f"Score: {self.score}",True,(0, 0, 0))
+
+            #testing
+            #speed_text = self.font.render(f"Speed: {abs(self.ball.vx):.1f}",True,(0, 0, 0))
 
             self.window.blit(score_text, (20, 20))
+
+            #testing
+            #self.window.blit(speed_text, (20, 70))
 
             # Lives
             for i in range(3):
@@ -114,10 +121,7 @@ class Game:
 
                 heart = self.font.render("♥", True, color)
 
-                self.window.blit(
-                    heart,
-                    (650 + i * 40, 20)
-                )
+                self.window.blit(heart,(650 + i * 40, 20))
 
             # Game Over Screen
             if self.game_over:

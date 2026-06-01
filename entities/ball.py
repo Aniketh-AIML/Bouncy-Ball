@@ -9,13 +9,34 @@ class Ball:
 
         self.reset()
 
+        # Remember original speed
+        self.base_vx = BALL_SPEED_X
+        self.base_vy = BALL_SPEED_Y
+
     def reset(self):
 
-        self.x = 10
+        self.x = WIDTH // 2
         self.y = 100
 
         self.vx = BALL_SPEED_X
         self.vy = BALL_SPEED_Y
+
+    def increase_speed(self):
+
+        # Current maximum allowed speeds
+        max_vx = self.base_vx * BALL_MAX_SPEED_MULTIPLIER
+        max_vy = self.base_vy * BALL_MAX_SPEED_MULTIPLIER
+
+        # Increase speed by 5%
+        self.vx *= BALL_SPEED_MULTIPLIER
+        self.vy *= BALL_SPEED_MULTIPLIER
+
+        # Cap the speed
+        if abs(self.vx) > max_vx:
+            self.vx = max_vx if self.vx > 0 else -max_vx
+
+        if abs(self.vy) > max_vy:
+            self.vy = max_vy if self.vy > 0 else -max_vy
 
     def update(self):
 
