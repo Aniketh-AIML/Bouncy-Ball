@@ -30,6 +30,9 @@ python main.py
 ## Future Improvements
 
 * Score system
-* Game over screen
 * Sound effects
+
+## Added Features
+
 * Difficulty progression
+* Game over screen
