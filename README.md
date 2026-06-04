@@ -36,3 +36,4 @@ python main.py
 
 * Difficulty progression
 * Game over screen
+  </br>
