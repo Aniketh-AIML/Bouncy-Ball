@@ -65,6 +65,8 @@ game/
 
 * High Score Saving
 * Particle Effects
+* Pause mechanic 
+* levels
 
 ## Added Features
 
