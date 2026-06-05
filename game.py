@@ -1,5 +1,6 @@
 import pygame
 
+from utils.sounds import SoundManager
 from settings import *
 from entities.ball import Ball
 from entities.paddle import Paddle
@@ -19,7 +20,10 @@ class Game:
         self.background = load_background()
 
         self.paddle = Paddle()
+
+
         self.ball = Ball()
+        self.sounds = SoundManager()
 
         self.lives = START_LIVES
         self.score = 0
@@ -27,6 +31,7 @@ class Game:
         self.font = pygame.font.SysFont("arial", 40)
 
         self.game_over = False
+        self.waiting_to_start = True
         self.game_over_font = pygame.font.SysFont("Arial", 100, bold=True)
         self.score_font = pygame.font.SysFont("Arial", 28)
 
@@ -42,6 +47,11 @@ class Game:
                     pygame.quit()
                     exit()
 
+                if (event.type == pygame.KEYDOWN
+                    and event.key == pygame.K_SPACE
+                    and self.waiting_to_start):
+                        self.waiting_to_start = False
+
                 if self.game_over:
 
                     if event.type == pygame.MOUSEBUTTONDOWN:
@@ -52,6 +62,7 @@ class Game:
                             self.score = 0
 
                             self.ball.reset()
+                            self.waiting_to_start = True
 
                             self.paddle.x = 340
 
@@ -61,7 +72,12 @@ class Game:
 
                 self.paddle.move()
 
-                self.ball.update()
+                if not self.waiting_to_start:
+
+                    wall_hit = self.ball.update()
+
+                    if wall_hit:
+                        self.sounds.play_wall_hit()
 
                 # Paddle collision
                 if (
@@ -73,8 +89,12 @@ class Game:
                 ):
 
                     self.ball.vy = -self.ball.vy
+                    self.sounds.play_paddle_hit()
 
+                    #score up
                     self.score += 1
+                    if self.score % 10 == 0:
+                        self.sounds.play_score_up()
 
                     # Every 5 hits increase speed
                     if self.score % 5 == 0:
@@ -84,11 +104,15 @@ class Game:
                 if self.ball.y + self.ball.radius > HEIGHT:
 
                     self.lives -= 1
+                    self.sounds.play_loose_heart()
 
                     self.ball.reset()
+                    self.waiting_to_start = True
 
                 # Game Over
-                if self.lives <= 0:
+                if self.lives <= 0 and not self.game_over:
+
+                    self.sounds.play_game_over()
                     self.game_over = True
 
             # Background
@@ -147,6 +171,24 @@ class Game:
                 button_text_rect = button_text.get_rect(center=self.button_rect.center)
 
                 self.window.blit(button_text,button_text_rect)
+
+
+
+            if self.waiting_to_start and not self.game_over:
+
+                start_font = pygame.font.SysFont("Arial", 36)
+
+                start_text = start_font.render(
+                    "Press SPACE",
+                    True,
+                    (0, 0, 0)
+                )
+
+                start_rect = start_text.get_rect(
+                    center=(WIDTH // 2, HEIGHT // 2)
+                )
+
+                self.window.blit(start_text, start_rect)
 
             pygame.display.flip()
             self.clock.tick(FPS)

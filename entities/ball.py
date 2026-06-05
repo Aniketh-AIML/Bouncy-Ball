@@ -40,17 +40,24 @@ class Ball:
 
     def update(self):
 
+        wall_hit = False
+
         self.x += self.vx
         self.y += self.vy
 
         if self.x - self.radius < 0:
             self.vx = -self.vx
+            wall_hit = True
 
         if self.x + self.radius > WIDTH:
             self.vx = -self.vx
+            wall_hit = True
 
         if self.y - self.radius < 0:
             self.vy = -self.vy
+            wall_hit = True
+
+        return wall_hit
 
     def draw(self, surface):
 
