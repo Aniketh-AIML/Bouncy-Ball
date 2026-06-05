@@ -35,6 +35,7 @@ python main.py
 
 ## Project Structure
 
+```text
 game/
 │
 ├── entities/
@@ -46,12 +47,19 @@ game/
 │   └── sounds.py
 │
 ├── resources/
-│   ├── backgrounds/
+│   ├── background_yellow.jpg
 │   └── sound_effects/
+│       ├── paddle_hit.mp3
+│       ├── wall_hit.mp3
+│       ├── loose_heart.mp3
+│       ├── score_up.mp3
+│       └── game_over.mp3
 │
 ├── game.py
 ├── settings.py
-└── main.py
+├── main.py
+└── README.md
+```
 
 ## Future Improvements
 
