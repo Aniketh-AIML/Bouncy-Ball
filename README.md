@@ -36,7 +36,6 @@ python main.py
 * Left Arrow: Move paddle left
 * Right Arrow: Move paddle right
 
-## Project Structure
 
 ## Project Structure
 
@@ -78,7 +77,6 @@ game/
 
 ## Future Improvements
 
-* High Score Saving
 * Particle Effects
 * Pause mechanic 
 * levels
@@ -89,3 +87,4 @@ game/
 * Game over screen
 * Score system
 * Sound effects
+* High Score Saving
