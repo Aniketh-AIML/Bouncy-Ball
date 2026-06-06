@@ -8,13 +8,16 @@ A simple arcade-style bouncing ball game built with Python and Pygame.
 * Player-controlled paddle
 * Real-time collision detection
 * Score tracking system
-* Lives system with heart display
-* Difficulty progression (ball speed increases over time)
-* Sound effects for gameplay events
+* Persistent high score saving
+* Lives system with visual heart indicators
+* Progressive difficulty scaling
+* Dynamic ball speed progression
+* Sound effects for paddle hits, wall bounces, scoring, life loss, and game over
 * Press SPACE to start gameplay
 * Game over screen with restart button
-* Custom game background
-* 60 FPS gameplay
+* Multiple background themes
+* Clean modular project structure
+* 60 FPS smooth gameplay
 
 ## Technologies Used
 
