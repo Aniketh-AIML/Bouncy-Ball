@@ -5,6 +5,7 @@ from settings import *
 from entities.ball import Ball
 from entities.paddle import Paddle
 from utils.assets import load_background
+from utils.highscore import (load_high_score,save_high_score)
 
 
 class Game:
@@ -27,6 +28,7 @@ class Game:
 
         self.lives = START_LIVES
         self.score = 0
+        self.high_score = load_high_score()
 
         self.font = pygame.font.SysFont("arial", 40)
 
@@ -93,6 +95,14 @@ class Game:
 
                     #score up
                     self.score += 1
+
+                    # New high score
+                    if self.score > self.high_score:
+
+                        self.high_score = self.score
+
+                        save_high_score(self.high_score)
+
                     if self.score % 10 == 0:
                         self.sounds.play_score_up()
 
@@ -127,10 +137,13 @@ class Game:
             # Score
             score_text = self.font.render(f"Score: {self.score}",True,(0, 0, 0))
 
+            high_score_text = self.font.render(f"Best: {self.high_score}",True,(0, 0, 0))
+
             #testing
             #speed_text = self.font.render(f"Speed: {abs(self.ball.vx):.1f}",True,(0, 0, 0))
 
             self.window.blit(score_text, (20, 20))
+            self.window.blit(high_score_text, (20, 70))
 
             #testing
             #self.window.blit(speed_text, (20, 70))
@@ -178,15 +191,9 @@ class Game:
 
                 start_font = pygame.font.SysFont("Arial", 36)
 
-                start_text = start_font.render(
-                    "Press SPACE",
-                    True,
-                    (0, 0, 0)
-                )
+                start_text = start_font.render("Press SPACE",True,(0, 0, 0))
 
-                start_rect = start_text.get_rect(
-                    center=(WIDTH // 2, HEIGHT // 2)
-                )
+                start_rect = start_text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
 
                 self.window.blit(start_text, start_rect)
 
