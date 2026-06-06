@@ -35,30 +35,42 @@ python main.py
 
 ## Project Structure
 
+## Project Structure
+
 ```text
 game/
 │
 ├── entities/
+│   ├── __init__.py
 │   ├── ball.py
 │   └── paddle.py
 │
 ├── utils/
+│   ├── __init__.py
 │   ├── assets.py
-│   └── sounds.py
+│   ├── sounds.py
+│   └── highscore.py
 │
 ├── resources/
-│   ├── background_yellow.jpg
-│   └── sound_effects/
-│       ├── paddle_hit.mp3
-│       ├── wall_hit.mp3
-│       ├── loose_heart.mp3
-│       ├── score_up.mp3
-│       └── game_over.mp3
+│   ├── backgrounds/
+│   │   ├── background_blue.jpg
+│   │   ├── background_brown.jpg
+│   │   └── background_yellow.jpg
+│   │
+│   ├── sound_effects/
+│   │   ├── paddle_hit.mp3
+│   │   ├── wall_hit.mp3
+│   │   ├── loose_heart.mp3
+│   │   ├── score_up.mp3
+│   │   └── game_over.mp3
+│   │
+│   └── highscore.txt
 │
 ├── game.py
 ├── settings.py
 ├── main.py
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
 ## Future Improvements
