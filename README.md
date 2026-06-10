@@ -80,6 +80,7 @@ game/
 * Particle Effects
 * Pause mechanic 
 * levels
+* improved UI
 
 ## Added Features
 
